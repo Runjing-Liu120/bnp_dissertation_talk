@@ -1,9 +1,9 @@
 \begin{frame}{The Variational Approximation}
 
 Let $\theta$ be latent variables and $y$ the observed data.
+The exact posterior $p(\theta | y)$ is intractable.
 
 We posit a class of mean-field distributions parameterized by a real vector $\eta$.
-
 We solve
 \begin{align*}
   \eta^* = \argmin_{\eta} KL\left(
@@ -12,6 +12,7 @@ We solve
 \end{align*}
 
 \only<1>{
+\vspace{-1em}
 \begin{figure}[!h]
 \centering
 \includegraphics[width = 0.4\textwidth]{./figures/static_figures/vi_schematic2.png}
