@@ -3,14 +3,14 @@ Let $p_0(\nu_k)$ be the original Beta prior on sticks.
 
 Suppose we wish to replace $p_0$ with another distribution $p_1$. Define the ``contaminated" prior as:
 \begin{align*}
-p_c(\nu_k \vert \epsilon) \propto
-p_{0}(\nu_k)\exp(\epsilon\phi(\nu_k))
+p_c(\nu_k \vert \t) \propto
+p_{0}(\nu_k)\exp(\t\phi(\nu_k))
 \end{align*}
 where $\phi(\nu_k) = \log p_1(\nu_k) - \log p_0(\nu_k)$.
 
 \begin{figure}[!h]
 \centering
-\includegraphics[width = 0.45\textwidth]{./figures/static_figures/functional_perturbation.png}
+\includegraphics[width = 0.45\textwidth]{./figures/static_figures/functional_perturbation2.png}
 \setlength{\textfloatsep}{-10pt}
 \end{figure}
 
@@ -23,9 +23,9 @@ Consider a posterior statistic of interest $g(\eta)$, e.g.
 g_{\textrm{cl}}(\eta) = \Expect_{q_{\eta}} \left[ \#\text{clusters} \right]
 \end{align*}
 
-Let $S_g$ be the \textit{local sensitivity} of $g$ with respect to a hyper-parameter $\epsilon$
+Let $S_g$ be the \textit{local sensitivity} of $g$ with respect to a hyper-parameter $\t$
 \begin{align*}
-S_g := \frac{d}{d\epsilon} \; g(\eta(\epsilon))
+S_g := \frac{d}{d\t} \; g(\eta(\t))
 \end{align*}
 
 \pause

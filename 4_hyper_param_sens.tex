@@ -1,16 +1,16 @@
 \begin{frame}{Hyperparameter Sensitivity}
 
-Let $\epsilon$ be a real-valued hyperparameter for the stick-breaking distribution
+Let $\t$ be a real-valued hyperparameter for the stick-breaking distribution
 (e.\ g., this could be the $\alpha$ concentration parameter, or it could parameterize a functional shape).
 
 \pause
 
-{\bf Main idea: } We approximate the dependence of $\eta^*$ on $\epsilon$ with a first-order
+{\bf Main idea: } We approximate the dependence of $\eta^*$ on $\t$ with a first-order
 Taylor expansion:
 
 \begin{align*}
-  \eta^*(\epsilon)  &\approx  \eta^*(0) +
-  \frac{d \eta^*(\epsilon)}{d\epsilon^T}\Big|_{\epsilon=0} \epsilon
+  \eta^*(\t)  &\approx  \eta^*(0) +
+  \frac{d \eta^*(\t)}{d\t}\Big|_{\t=0} \t
 \end{align*}
 
 \pause
@@ -22,7 +22,7 @@ Notes:
 and modern
 {\color{blue} \href{https://jax.readthedocs.io/en/latest/}{automatic differentiation tools}}.
 
-\item We only use a linear approximation for the map $\epsilon \mapsto \eta^*(\epsilon)$. We retain nonlinearities in the map $\eta^* \mapsto
+\item We only use a linear approximation for the map $\t \mapsto \eta^*(\t)$. We retain nonlinearities in the map $\eta^* \mapsto
 \Expect_{q_{\eta^*}} \left[ \#\text{clusters} \right]$.
 
 \end{itemize}

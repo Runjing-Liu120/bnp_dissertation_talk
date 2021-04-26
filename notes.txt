@@ -1,0 +1,125 @@
+
+# slide 2
+each column represents an individual in the dataset.
+we modeled each individual as a mixture of latent populations.
+The colors in this plot represent the different latent populations,
+with the height of the colors in each column is proportional to the mixture weight
+on that latent population.
+
+You see that there are roughly 3 dominant latent populations. 
+
+The individuals are grouped by the geographic location from which they were sampled: these are labels on x-axis. 
+
+e.g. for individuals from Mbololo
+
+
+# slide 3
+
+these are questions that aren't unique to this particular application. 
+
+given any clustering problem, you typically want to know how many clusters are there. 
+
+This is a hard questions ... 
+
+
+and we do BNP. 
+
+# motivation slide
+But, just because we have a BNP model doesn't mean we are home free: a lot of subjective choices
+were involved in building a BNP model.
+
+Our goal is not just to produce a measure of sensitivity or robustness to model choices:
+but rather, we will evaluate how well we can **extrapolate** the results we would have gotten from refitting.
+
+
+
+# BNP model 
+
+the particular BNP model we use is called dirichlet process. 
+
+won't go into detail ... but the short version is that this prior draws stick-breaking proportions from a beta, 
+and you recursively break-off individual pieces according the the beta draws.
+the pieces that you break off form your mixture weights. 
+
+but essentially it is a prior on the infinite dimensional symplex. 
+
+this means, we allow for an infinite number of components in the world -- 
+and when I go collect data, some finite number of these components are manifested in my data set as clusters. 
+
+by assuming an infinite number of components, we don't have to choose K beforehand. 
+
+For example, in that population genetics example, this model says that there are an infinite number of populatiosn out in the world ... 
+I never get to see them all: I get to see some subset of the populations in my dataset. 
+and as I collect more and more data, I'll see more and more populations. 
+
+
+
+# variational distribution 
+
+this theta would include the stick breaking proportions, and any other unknowns. 
+
+# hyper parameer sensitivity
+
+\eta*(0) is my initial fit. I solved the optimization once at t = 0. 
+
+Now I want to know what happens at eta(t). I could resolve, but this is expensive. 
+
+what we do instead, is we approximate the dependence of eta --- which might be some super complex function ---
+using a simple linear approximation. 
+
+only the mapping from t to eta(t) is expensive (involves re-optimizing the KL objective). 
+
+
+# iris data: pca 
+we didn't need to specify K; we were able to recover the three iris species (at alpha = 6). 
+
+is this result sensitive to alpha?
+
+# iris data alpha sensitivity: 
+note the nonlinearities ...
+
+# functional sensitivity
+Let p_0 be the original prior on sticks, remember it was Beta.
+Suppose we didn't want the beta distribution, but rather, we wanted another distribution,
+called p_1.
+
+what I'm displaying here, i'm calling the "contaminated" prior, parameterized by t, 
+is simply a parameterization for how we can walk from p0 to p1:
+by defining this phi to be the log rato, 
+at t = 0 I ge tthe original prior, 
+and when t = 1, I get the new prior. 
+
+In this cartoon, these two points represent the beta prior and the alternative prior as two points
+in the space of all priors.
+
+And our machinery from the previous example goes through ...
+
+so before I show results, I'll present one more concept: the idea of an influence function. 
+
+# influence functions
+Psi plays the role of the "gradient" in this function space. 
+
+This is important because we can compute the influence function (i didn't give formulas ... but we can!)
+
+and this inner product gives us ideas as to how prior perturbations will affect the posterior statistic. 
+
+here's what I mean: 
+
+# iris influence functions
+top row is just betas at alpha = 6 
+rembember beta distribution is on 0-1. 
+on the left, I've unconstrained the betas with a logit transformation, so the distribution is over the real-line. 
+its just the beta density after a change-of-variables. 
+
+
+
+In grey, I'm plotting the log of phi, and in blue is the original Beta prior.
+
+So to get the perturbed prior, we multiply the blue function by the exp of the grey function.
+
+So we are adding mass close to zero.
+
+# slide 13
+We choose this L-infinity norm because combined with the multiplicative perturbation,
+finiteness of the L-inf norm implies existence of the posterior.
+So this choice of norm goes hand-in-hand with our choice of perturbation.
